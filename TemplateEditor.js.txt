@@ -1,0 +1,22 @@
+// TemplateEditor.js
+import React from 'react';
+
+const TemplateEditor = ({ columns, template, setTemplate }) => {
+  const insertPlaceholder = (placeholder) => {
+    setTemplate(`${template} {${placeholder}}`);
+  };
+
+  return (
+    <div>
+      <textarea
+        value={template}
+        onChange={(e) => setTemplate(e.target.value)}
+      />
+      {columns.map((col) => (
+        <button onClick={() => insertPlaceholder(col)}>{col}</button>
+      ))}
+    </div>
+  );
+};
+
+export default TemplateEditor;

@@ -1,0 +1,15 @@
+// routes/llm.js
+const express = require('express');
+const router = express.Router();
+const axios = require('axios');
+
+router.post('/generate-email', async (req, res) => {
+  const { prompt } = req.body;
+  const response = await axios.post('LLM_API_ENDPOINT', {
+    prompt,
+    // Include necessary headers and auth
+  });
+  res.json({ emailContent: response.data });
+});
+
+module.exports = router;

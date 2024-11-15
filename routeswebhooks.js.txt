@@ -1,0 +1,8 @@
+// routes/webhooks.js
+router.post('/sendgrid', (req, res) => {
+  const events = req.body;
+  events.forEach((event) => {
+    // Update email status in the database
+  });
+  res.sendStatus(200);
+});

@@ -1,0 +1,43 @@
+// Dashboard.js
+const Dashboard = () => {
+  const [emails, setEmails] = useState([]);
+
+  useEffect(() => {
+    // Fetch initial email data
+    axios.get('/api/emails').then((response) => setEmails(response.data));
+
+    // Listen for real-time updates
+    socket.on('emailStatusUpdate', (data) => {
+      setEmails((prevEmails) =>
+        prevEmails.map((email) =>
+          email.id === data.emailId ? { ...email, status: data.status } : email
+        )
+      );
+    });
+  }, []);
+
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>Company Name</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Delivery Status</th>
+          <th>Opened</th>
+        </tr>
+      </thead>
+      <tbody>
+        {emails.map((email) => (
+          <tr key={email.id}>
+            <td>{email.companyName}</td>
+            <td>{email.address}</td>
+            <td>{email.status}</td>
+            <td>{email.deliveryStatus}</td>
+            <td>{email.opened ? 'Yes' : 'No'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
