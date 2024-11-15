@@ -69,7 +69,7 @@ o Allow users to input SMTP settings manually.
 Sending Emails:
 * Use nodemailer to send emails via SMTP or OAuth2.
 javascript
-Copy code
+
 // emailService.js
 const nodemailer = require('nodemailer');
 
@@ -94,8 +94,7 @@ module.exports = sendEmail;
 Front-End:
 * Create a rich text editor or a simple textarea for the email template.
 * Implement a placeholder insertion tool that lists available columns from the data.
-jsx
-Copy code
+
 // TemplateEditor.js
 import React from 'react';
 
@@ -128,8 +127,7 @@ Back-End:
 Content Generation with LLM:
 * Back-End:
 o Set up an endpoint to generate email content using the LLM API.
-javascript
-Copy code
+
 // routes/llm.js
 const express = require('express');
 const router = express.Router();
@@ -147,8 +145,7 @@ router.post('/generate-email', async (req, res) => {
 module.exports = router;
 * Email Sending Logic:
 o Implement a function that replaces placeholders with actual data.
-javascript
-Copy code
+
 const generateEmailContent = (template, dataRow) => {
   let content = template;
   for (const key in dataRow) {
@@ -162,7 +159,7 @@ Scheduling Emails:
 * Back-End:
 o Use node-cron to schedule emails.
 javascript
-Copy code
+ 
 const cron = require('node-cron');
 
 const scheduleEmail = (date, task) => {
@@ -171,8 +168,7 @@ const scheduleEmail = (date, task) => {
 };
 * Throttling:
 o Implement a queue system to limit the number of emails sent per time unit.
-javascript
-Copy code
+
 const queue = [];
 let isProcessing = false;
 
@@ -200,12 +196,11 @@ Back-End:
 * Update email statuses in the database.
 * Emit events via Socket.io when statuses change.
 javascript
-Copy code
+ 
 io.emit('emailStatusUpdate', { emailId, status });
 Front-End:
 * Listen for events and update the dashboard accordingly.
-jsx
-Copy code
+
 useEffect(() => {
   socket.on('emailStatusUpdate', (data) => {
     updateEmailStatus(data.emailId, data.status);
@@ -216,8 +211,7 @@ useEffect(() => {
 Integrate with ESP (e.g., SendGrid):
 * Back-End:
 o Use SendGrid's Node.js library to send emails.
-javascript
-Copy code
+
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(SENDGRID_API_KEY);
 
@@ -226,8 +220,7 @@ const sendEmail = async (emailOptions) => {
 };
 * Set Up Webhooks:
 o Configure webhooks in SendGrid to point to your application endpoints.
-javascript
-Copy code
+
 // routes/webhooks.js
 router.post('/sendgrid', (req, res) => {
   const events = req.body;
@@ -239,8 +232,7 @@ router.post('/sendgrid', (req, res) => {
 10. Real-Time Dashboard
 Front-End:
 * Create a table to display each email's status.
-jsx
-Copy code
+
 // Dashboard.js
 const Dashboard = () => {
   const [emails, setEmails] = useState([]);
@@ -285,28 +277,23 @@ const Dashboard = () => {
   );
 };
 
-Documentation (README.md)
+Documentation 
 Setup and Configuration
 1. Clone the Repository
-bash
-Copy code
+
 git clone https://github.com/your-repo/custom-email-sender.git
 cd custom-email-sender
 2. Install Dependencies
 o Front-End:
-bash
-Copy code
 cd client
 npm install
 o Back-End:
-bash
-Copy code
 cd server
 npm install
 3. Environment Variables
 o Create a .env file in the server directory with the following:
 makefile
-Copy code
+
 MONGODB_URI=your_mongodb_uri
 SENDGRID_API_KEY=your_sendgrid_api_key
 LLM_API_KEY=your_llm_api_key
@@ -315,12 +302,12 @@ CLIENT_SECRET=your_oauth_client_secret
 4. Running the Application
 o Back-End:
 bash
-Copy code
+
 cd server
 npm start
 o Front-End:
 bash
-Copy code
+
 cd client
 npm start
 Configuring API Keys
